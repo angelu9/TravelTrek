@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Index 1</title>
+</head>
+<body>
+    <form id="user">
+        Search The Web:<br>
+        <input type="text" id="search" />
+        <button type="button" class="btn btn-success" id="submit">Submit</button>
+    </form>
+    <div id = "result">
+
+    </div>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        $("#submit").on("click", function (event){
+            var key = "b14dbd97f0mshf7537a54edf57f0p1465bcjsnbd9981adabe8"
+            var host = "contextualwebsearch-websearch-v1.p.rapidapi.com"
+       var search =$("#search").val();
+        var queryURL = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI?autoCorrect=true&pageNumber=1&pageSize=10&q="+search+"&safeSearch=false";
+        console.log(queryURL);
+        console.log(host);
+        console.log(key);
+        $.ajax({
+                method: "GET",
+                url: queryURL,
+                  headers: {
+                "X-RapidAPI-Key": key,
+                "X-RapidAPI-Host": host
+            },  
+                
+            }).then(function (response) {
+                console.log(response)
+                $("#result").text(response.relatedSearch);
+            });
+      
+        });
+    </script>
+</body>
+</html>
