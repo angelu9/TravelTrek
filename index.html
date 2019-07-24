@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Index 1</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        var host = 'data.usajobs.gov';
+            var userAgent = 'jme0917@gmail.com';
+            var authKey = 'YourAPIKey';
+        var key= "31sSSJYsArMAunoR1tud90fBLPSy1TbX93LYfEcnt/8="
+        var queryURL = "https://data.usajobs.gov/api/search?JobCategoryCode=2210"
+        console.log(queryURL);
+        $.ajax({
+                url: queryURL,
+                method: "GET",
+                 headers: {
+                "Host": host,
+                "User-Agent": userAgent,
+                "Authorization-Key": authKey
+            }  
+
+            }).then(function (response) {
+                console.log(response)
+            });
+      
+
+    </script>
+</body>
+</html>
