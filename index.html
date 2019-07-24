@@ -7,29 +7,43 @@
     <title>Index 1</title>
 </head>
 <body>
+    <form id="user">
+        Search The Web:<br>
+        <input type="text" id="search" />
+        <button type="button" class="btn btn-success" id="submit">Submit</button>
+    </form>
+    <div id = "result">
+
+    </div>
+
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
 
-        var host = 'data.usajobs.gov';
-            var userAgent = 'jme0917@gmail.com';
-            var authKey = 'YourAPIKey';
-        var key= "31sSSJYsArMAunoR1tud90fBLPSy1TbX93LYfEcnt/8="
-        var queryURL = "https://data.usajobs.gov/api/search?JobCategoryCode=2210"
+        $("#submit").on("click", function (event){
+            var key = "b14dbd97f0mshf7537a54edf57f0p1465bcjsnbd9981adabe8"
+            var host = "contextualwebsearch-websearch-v1.p.rapidapi.com"
+       var search =$("#search").val();
+        var queryURL = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI?autoCorrect=true&pageNumber=1&pageSize=10&q="+search+"&safeSearch=false";
         console.log(queryURL);
+        console.log(host);
+        console.log(key);
         $.ajax({
-                url: queryURL,
                 method: "GET",
-                 headers: {
-                "Host": host,
-                "User-Agent": userAgent,
-                "Authorization-Key": authKey
-            }  
-
+                url: queryURL,
+                  headers: {
+                "X-RapidAPI-Key": key,
+                "X-RapidAPI-Host": host
+            },  
+                
             }).then(function (response) {
                 console.log(response)
+                $("#result").text(response.relatedSearch);
             });
       
-
+        });
     </script>
 </body>
 </html>
