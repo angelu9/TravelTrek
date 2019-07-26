@@ -1,4 +1,29 @@
 .jumbotron {
     margin-top: 70px;
 }
+.images{
+   
+    padding: 10px;
+    
+}
+.videos{
+    float: left;
+}
+table, td, th, tr {
+    border: 1px solid black;
+   
+  }
+  #recentSearch{
+      height: 1000px;
+      background-color:lightgray;
+  }
+  .caption{
+      display: block;
+      cursor: pointer;
+      text-align: center;
+  }
+  .display{
+      float:left;
+  }
+ 
 
