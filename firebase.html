@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+​
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id"
+        content="583355390777-aq3l8b35s937lva87sc71h7okeo3cga5.apps.googleusercontent.com">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Index 1</title>
+</head>
+​<style>
+    body {
+        width: 100wh;
+        height: 90vh;
+        color: #fff;
+        background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+        background-size: 400% 400%;
+        -webkit-animation: Gradient 15s ease infinite;
+        -moz-animation: Gradient 15s ease infinite;
+        animation: Gradient 15s ease infinite;
+    }
+
+    @-webkit-keyframes Gradient {
+        0% {
+            background-position: 0% 50%
+        }
+
+        50% {
+            background-position: 100% 50%
+        }
+
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @-moz-keyframes Gradient {
+        0% {
+            background-position: 0% 50%
+        }
+
+        50% {
+            background-position: 100% 50%
+        }
+
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @keyframes Gradient {
+        0% {
+            background-position: 0% 50%
+        }
+
+        50% {
+            background-position: 100% 50%
+        }
+
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    h1,
+    h6 {
+        font-family: 'Open Sans';
+        font-weight: 300;
+        text-align: center;
+        position: absolute;
+        top: 45%;
+        right: 0;
+        left: 0;
+    }
+
+    textarea {
+        display: block;
+        border: 1px solid #BBB;
+        color: #444;
+        font-size: 110%;
+    }
+
+    button {
+        margin-top: 10px;
+    }
+</style>
+
+<body>
+    <form>
+        Search:
+        <input type="text" id="search" /><br>
+        <button type="button" class="btn btn-success" id="submit">Search The Web</button>
+        <button type="button" class="btn btn-success" id="submitImage">Search Image</button>
+        <button type="button" class="btn btn-success" id="submitVideo">Search Videos</button>
+    </form>
+
+    
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <div id="result">
+        ​
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="text/javascript">
+
+
+
+        // Davi's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCqNzQgw2Ime4kKdd3YHCd5oajaNlGphnc",
+            authDomain: "test-project-6cfff.firebaseapp.com",
+            databaseURL: "https://test-project-6cfff.firebaseio.com",
+            projectId: "test-project-6cfff",
+            storageBucket: "",
+            messagingSenderId: "583355390777",
+            appId: "1:583355390777:web:d5dfb38807b52297"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        var database = firebase.database();
+        var clickCounter = 10000;
+
+
+        $(document).ready(function () {
+
+
+            function onSignIn(googleUser) {
+                // Useful data for your client-side scripts:
+                var profile = googleUser.getBasicProfile();
+                console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+                console.log('Full Name: ' + profile.getName());
+                console.log('Given Name: ' + profile.getGivenName());
+                console.log('Family Name: ' + profile.getFamilyName());
+                console.log("Image URL: " + profile.getImageUrl());
+                console.log("Email: " + profile.getEmail());
+
+                // The ID token you need to pass to your backend:
+                var id_token = googleUser.getAuthResponse().id_token;
+                console.log("ID Token: " + id_token);
+            }
+
+
+
+
+            $("#submit").on("click", function (event) {
+
+                $("#result").empty();
+                clickCounter++;
+                database.ref().set({
+                    clickCount: clickCounter
+                });
+
+                function visitor() {
+                    var p = $("<p>")
+
+                    $("#result").text('This page have been searched ' + clickCounter + ' times');
+                }
+                visitor();
+                //API USED Contextualwebsearch
+
+                var key = "b14dbd97f0mshf7537a54edf57f0p1465bcjsnbd9981adabe8"
+                var host = "contextualwebsearch-websearch-v1.p.rapidapi.com"
+                var search = $("#search").val();
+                var queryURL = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI?autoCorrect=true&pageNumber=1&pageSize=10&q=" + search + "&safeSearch=false";
+                var topSearches = $("<p>").text("Top Searches for " + search + " are:");
+                console.log(host);
+                console.log(key);
+                $.ajax({
+                    method: "GET",
+                    url: queryURL,
+                    headers: {
+                        "X-RapidAPI-Key": key,
+                        "X-RapidAPI-Host": host
+                    },
+
+                }).then(function (response) {
+                    console.log(queryURL);
+                    console.log(response.value)
+                    var results = response.value;
+                    // Looping through each result item
+                    for (var i = 0; i < results.length; i++) {
+
+                        // Creating and storing a div tag
+                        var displayDiv = $("<div>");
+
+                        // Creating a paragraph tag with the result item's rating
+                        var p2 = $("<p>").text("Source: " + results[i].provider.name);
+                        var p3 = $("<p>").text("Title: " + results[i].body);
+                        var p = $("<a>").attr("href", results[i].url).text("URL " + results[i].url);
+
+                        displayDiv.append(p2);
+                        displayDiv.append(p3);
+                        displayDiv.append(p);
+
+
+                        $("#result").prepend(displayDiv);
+                        // $("#search").val("");
+
+                    }
+                });
+
+                //Top Searches AutoComplete API USED Contextualwebsearch
+                var queryAuto = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/spelling/AutoComplete?text=" + search
+
+                $.ajax({
+                    method: "GET",
+                    url: queryAuto,
+                    headers: {
+                        "X-RapidAPI-Key": key,
+                        "X-RapidAPI-Host": host
+                    },
+
+                }).then(function (response) {
+                    console.log(queryAuto);
+                    console.log(response)
+
+
+                    // Looping through each result item
+                    for (var i = 0; i < response.length; i++) {
+
+                        // Creating and storing a div tag
+                        var displayDiv = $("<div>");
+
+                        // Creating a paragraph tag with the result item's rating
+
+                        var p2 = $("<p>").text(response[i]);
+
+
+                        displayDiv.append(topSearches);
+                        displayDiv.append(p2);
+
+
+
+                        $("#result").prepend(displayDiv);
+                        // $("#search").val("");
+                    }
+
+                });
+            });
+
+
+
+            //API USED pixabay free images by thousands of users online
+
+            $("#submitImage").on("click", function (event) {
+
+                $("#result").empty();
+
+                var imgKey = "13124707-0417aa5bfcc30fe6d133d9572"
+                var imageSearch = $("#search").val();
+                var queryImageURL = "https://pixabay.com/api/?key=" + imgKey + "&q=" + imageSearch + "&image_type=photo"
+                console.log(imageSearch)
+                console.log(queryImageURL)
+                $.ajax({
+                    method: "GET",
+                    url: queryImageURL,
+
+                }).then(function (response) {
+                    console.log(response)
+                    var results = response.hits;
+                    console.log(results)
+                    // Looping through each result item
+                    for (var i = 0; i < results.length; i++) {
+
+                        // Creating and storing a div tag
+                        var displayDiv = $("<div>");
+
+                        // Creating a paragraph tag with the result item's rating
+                        var p = $("<p>").text("downloads: " + results[i].views);
+
+                        // Creating and storing an image tag
+                        var resultImage = $("<img>");
+                        // Setting the src attribute of the image to a property pulled off the result item
+                        resultImage.attr("src", results[i].webformatURL);
+
+                        // Appending the paragraph and image tag 
+                        displayDiv.append(p);
+                        displayDiv.append(resultImage);
+
+                        $("#result").prepend(displayDiv);
+                        // $("#search").val("");
+
+                    }
+
+                });
+            });
+
+            //API USED pixabay free videos by thousands of users online
+            $("#submitVideo").on("click", function (event) {
+
+                $("#result").empty();
+
+                var vidKey = "13124707-0417aa5bfcc30fe6d133d9572"
+                var videoSearch = $("#search").val();;
+                var queryImageURL = "https://pixabay.com/api/videos/?key=" + vidKey + "&q=" + videoSearch
+                console.log(videoSearch)
+                console.log(queryImageURL)
+                $.ajax({
+                    method: "GET",
+                    url: queryImageURL,
+
+                }).then(function (response) {
+                    console.log(response)
+                    var results = response.hits;
+                    console.log(results)
+                    // Looping through each result item
+                    for (var i = 0; i < results.length; i++) {
+
+                        // Creating and storing a div tag
+                        var displayDiv = $("<div>");
+
+                        // Creating a paragraph tag with the result item's rating
+                        var p = $("<p>").text("downloads: " + results[i].views);
+
+                        // Creating and storing an image tag
+                        var resultVideo = $("<iframe>");
+                        // Setting the src attribute of the image to a property pulled off the result item
+                        resultVideo.attr("src", results[i].videos.small.url);
+
+                        // Appending the paragraph and image tag 
+                        displayDiv.append(p);
+                        displayDiv.append(resultVideo);
+
+                        $("#result").prepend(displayDiv);
+                        // $("#search").val("");
+
+                    }
+
+                });
+            });
+
+
+
+
+
+            var googleKey = "AIzaSyBRlj_omJsZWTgEIXq9yLePCL_HNfIfdkk"
+            var google = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=" + googleKey
+            console.log(google)
+
+            $.ajax({
+                method: "GET",
+                url: google,
+
+            }).then(function (response) {
+                console.log(response)
+
+
+
+            });
+
+        });
+
+    </script>
+</body>
+​
+
+</html>
