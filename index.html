@@ -1,49 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Index 1</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+
+    <title>Document</title>
 </head>
+
+
+
+
 <body>
-    <form id="user">
-        Search The Web:<br>
-        <input type="text" id="search" />
-        <button type="button" class="btn btn-success" id="submit">Submit</button>
-    </form>
-    <div id = "result">
+
+
+    <div class="fixed-top">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand">Navbar</a>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </nav>
 
     </div>
 
 
 
+    <div class="jumbotron text-center">
 
+
+
+
+        <h1 class="display-4">My Project</h1>
+        <p class="lead">This is the greatest app in the world!</p>
+        <hr class="my-4">
+        <p></p>
+
+        <form id="user">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="search" placeholder="Search Here" aria-label='Type Here'
+                    aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2"></span>
+                </div>
+            </div>
+
+
+            <button class="btn btn-primary" type="submit" id="trendingButton">Trending</button>
+            <button class="btn btn-primary" type="submit" id=imageButton>Images</button>
+            <button class="btn btn-primary" type="submit" id=videoButton>Videos</button>
+            <button class="btn btn-primary" type="submit" id=placesButton>Places</button>
+        </form>
+ 
+    </div>
+<div id="result">
+
+</div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+              https://firebase.google.com/docs/web/setup#config-web-app -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" src="./assets/javascript/app.js"></script>
 
-        $("#submit").on("click", function (event){
-            var key = "b14dbd97f0mshf7537a54edf57f0p1465bcjsnbd9981adabe8"
-            var host = "contextualwebsearch-websearch-v1.p.rapidapi.com"
-       var search =$("#search").val();
-        var queryURL = "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI?autoCorrect=true&pageNumber=1&pageSize=10&q="+search+"&safeSearch=false";
-        console.log(queryURL);
-        console.log(host);
-        console.log(key);
-        $.ajax({
-                method: "GET",
-                url: queryURL,
-                  headers: {
-                "X-RapidAPI-Key": key,
-                "X-RapidAPI-Host": host
-            },  
-                
-            }).then(function (response) {
-                console.log(response)
-                $("#result").text(response.relatedSearch);
-            });
-      
-        });
-    </script>
 </body>
+
 </html>
