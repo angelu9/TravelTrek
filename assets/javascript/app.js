@@ -1,4 +1,5 @@
-
+$(document).ready(function () {
+    console.log("ready!");
 
 
 $("#trendingButton").on("click", function (event) {
@@ -225,3 +226,5 @@ function showPosition(position) {
     localStorage.setItem("latitude", lat);
     localStorage.setItem("longitude", lon);
 }
+
+});
