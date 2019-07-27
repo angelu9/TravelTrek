@@ -1,11 +1,28 @@
-$(document).ready(function () {
+window.onload = function () {
+
+    $("#navBar").hide();
+}
+
+function createNavButtons(){
+    var trending = $("<button>").attr("id","trendingButton").attr("class","btn btn-primary newbuttons").text("Trending");
+    var images = $("<button>").attr("id","imageButton").attr("class","btn btn-primary newbuttons").text("Images");
+    var videos = $("<button>").attr("id","videoButton").attr("class","btn btn-primary newbuttons").text("Videos");
+    var places = $("<button>").attr("id","places").attr("class","btn btn-primary newbuttons").text("Places");
+    var buttons =$("<div>").attr("id","placesButton");
+
+    
+    $("#navButtons").append(trending,images,videos,places);
+}
+// $(document).ready(function () {
 
     console.log("ready!");
 
     $("#trendingButton").on("click", function (event) {
         event.preventDefault();
         $("#result").empty();
-        // $("#jumbo").hide()
+        $("#jumbo").hide()
+        $("#navBar").show();
+        
         var searchInput = $("#search").val();
         var googleKey = "AIzaSyBRlj_omJsZWTgEIXq9yLePCL_HNfIfdkk"
         var googleSearch = "https://www.googleapis.com/customsearch/v1?key=" + googleKey + "&cx=015376139325119918930:8q0hmzh1doi&q=" + searchInput
@@ -42,7 +59,7 @@ $(document).ready(function () {
             }
 
         })
-
+        createNavButtons();
     });
 
     //===============================================================================================================
@@ -52,7 +69,8 @@ $(document).ready(function () {
     $("#imageButton").on("click", function (event) {
         event.preventDefault();
         $("#result").empty();
-        // $("#jumbo").hide()
+        $("#jumbo").hide()
+        $("#navBar").show();
 
         var imgKey = "13124707-0417aa5bfcc30fe6d133d9572"
         var imageSearch = $("#search").val();
@@ -100,6 +118,8 @@ $(document).ready(function () {
                 }
             }
         });
+
+       
     });
 
 
@@ -108,7 +128,8 @@ $(document).ready(function () {
     $("#videoButton").on("click", function (event) {
         event.preventDefault();
         $("#result").empty();
-        // $("#jumbo").hide()
+        $("#jumbo").hide()
+        $("#navBar").show();
 
         var vidKey = "13124707-0417aa5bfcc30fe6d133d9572"
         var videoSearch = $("#search").val();
@@ -158,7 +179,8 @@ $(document).ready(function () {
     $("#placesButton").on("click", function (event) {
         event.preventDefault();
         $("#result").empty();
-        // $("#jumbo").hide()
+        $("#jumbo").hide()
+        $("#navBar").show();
 
         getLocation()
 
@@ -231,7 +253,7 @@ $(document).ready(function () {
             }
         });
 
-    });
+    // });
 
     //=================================================================================================================
 
