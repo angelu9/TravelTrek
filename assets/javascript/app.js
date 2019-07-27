@@ -23,7 +23,7 @@ $(document).ready(function () {
             for (var i = 0; i < results.length; i++) {
 
                 // Creating and storing a div tag
-                var displayDiv = $("<div>");
+                var displayDiv = $("<div>").attr("class", "trend");
 
                 // Creating a paragraph tag with the result item's rating
                 var link = $("<a>").attr("href", results[i].formattedUrl).text("URL " + results[i].displayLink);
