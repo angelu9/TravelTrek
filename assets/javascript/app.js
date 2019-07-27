@@ -78,11 +78,21 @@ $("#trendingButton").on("click", function (event) {
 
             // Appending the paragraph and image tag 
 
+
             displayDiv.append(title);
             displayDiv.append(snip);
             displayDiv.append(link);
 
             $("#result").append(displayDiv);
+
+                //         
+            }
+        })
+
+        createNavButtons();
+
+    });
+
 
             //         
         }
