@@ -1,12 +1,11 @@
 $(document).ready(function () {
-    console.log("ready!");
 
+    console.log("ready!");
 
     $("#trendingButton").on("click", function (event) {
         event.preventDefault();
         $("#result").empty();
         // $("#jumbo").hide()
-
         var searchInput = $("#search").val();
         var googleKey = "AIzaSyBRlj_omJsZWTgEIXq9yLePCL_HNfIfdkk"
         var googleSearch = "https://www.googleapis.com/customsearch/v1?key=" + googleKey + "&cx=015376139325119918930:8q0hmzh1doi&q=" + searchInput
@@ -43,9 +42,10 @@ $(document).ready(function () {
             }
 
         })
+
     });
 
-
+    //===============================================================================================================
     //API USED pixabay free images by thousands of users online
     //This API allow the user so find photos by local or turist in high def unlike random pictues.
 
@@ -102,6 +102,8 @@ $(document).ready(function () {
         });
     });
 
+
+    //===================================================================================================================
     //API USED pixabay free videos by thousands of users online
     $("#videoButton").on("click", function (event) {
         event.preventDefault();
@@ -149,6 +151,8 @@ $(document).ready(function () {
         });
     });
 
+
+    //====================================================================================================================
     // Using the Google API Places and the Geolocation API to find places 5 miles radius from the user
 
     $("#placesButton").on("click", function (event) {
@@ -229,7 +233,7 @@ $(document).ready(function () {
 
     });
 
-
+    //=================================================================================================================
 
     //Getlocation function to find user's Geo Location then store in the browser local storage
     //This will allow the app to show user locations within the user's radius.
