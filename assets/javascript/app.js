@@ -1,4 +1,8 @@
 
+
+                // Creating and storing a div tag
+                var displayDiv = $("<div>").attr("class", "trend");
+=======
  // Davi's Firebase configuration
  var firebaseConfig = {
     apiKey: "AIzaSyCqNzQgw2Ime4kKdd3YHCd5oajaNlGphnc",
@@ -61,6 +65,7 @@ $("#trendingButton").on("click", function (event) {
     $.ajax({
         method: "GET",
         url: replace,
+
 
     }).then(function (response) {
         console.log(response)
