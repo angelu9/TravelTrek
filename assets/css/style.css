@@ -41,6 +41,7 @@ th {
 
 .display {
     float: left;
+
 } 
 
 .trend {
@@ -51,4 +52,11 @@ th {
 
 
 
+
+=======
+}
+
+.newbuttons{
+    margin-left:1px;
+}
 
