@@ -8,51 +8,38 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link href="https://fonts.googleapis.com/css?family=Dosis&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 
     <title>App</title>
+    <style>
+      
+    </style>
 </head>
-
-
-
-
 <body>
-
-
-
-    <div class="fixed-top">
+   <div class="fixed-top">
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand">Navbar</a>
+            <a class="navbar-brand" id="logo">TravelTrek</a>
             <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </nav>
-
     </div>
 
-
-
     <div class="jumbotron text-center" id="jumbo">
-
         <!-- <div class="parallax"><img src="./assets/Images/travel.jpg" alt="Unsplashed background img 1"></div> -->
-        <h1 class="display-4">My Project</h1>
-        <p class="lead">This is the greatest app in the world!</p>
+        <h1 class="display-4" id="logo-banner">TravelTrek</h1>
+        <p class="lead" id="slogan">Travel the world from your app!</p>
         <hr class="my-4">
         <div class="row">
             <div class="col-lg-4">
-
             </div>
             <div class="input-group mb-3 col-lg-4">
-
                 <input type="text" class="form-control" id="search" placeholder="Search Here">
             </div>
         </div>
-
-
         <!-- <button class="btn btn-primary modal-trigger" href="error" type="submit" id="trendingButton">Trending</button> -->
-
         <button class="btn btn-primary" type="submit" id=trendingButton>Trending</button>
         <button class="btn btn-primary" type="submit" id=imageButton>Images</button>
         <button class="btn btn-primary" type="submit" id=videoButton>Videos</button>
@@ -61,17 +48,13 @@
     </div>
     <div class="row">
         <div class="col-lg-1">
-
         </div>
         <div class="col-lg-8" id="result">
-
         </div>
         <div class="col-lg-3" id="recentSearch">
             <h2>Recent Searches</h2>
-
         </div>
     </div>
-
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
@@ -85,7 +68,5 @@
     <script type="text/javascript" src="./assets/javascript/app.js"></script>
     <!-- Compiled and minified JavaScript -->
 
-
 </body>
-
 </html>

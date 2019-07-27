@@ -40,3 +40,18 @@ th {
 .display {
     float: left;
 }
+#logo {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+    color: red;
+    font-size: 20px;
+  }
+  #logo-banner {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+    color: red;
+    font-size: 55px;
+  }
+  #slogan {
+      font-weight:600;
+  }
