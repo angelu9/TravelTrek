@@ -43,10 +43,12 @@ th {
 .newbuttons{
     margin-left:1px;
 }
+
 .trend {
     margin-top: 20px;
     margin-bottom: 20px;
     font-family: 'Times New Roman', Times, serif;
+    border-style: outset;
  }
 
  #logo {
@@ -65,3 +67,4 @@ th {
 #slogan{
     font-weight: bold;
 }
+
