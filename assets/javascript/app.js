@@ -222,7 +222,7 @@ function getSearches(search) {
 database.ref("clicks").on("value", function(snapshot){
     clickCounter = snapshot.val().clickCount;
     var display = $("<p>").text("Total Searches: "+snapshot.val().clickCount);
-    $("#clickCounter").append(display);
+    $("#clickCounter").html(display);
 
 });
 
