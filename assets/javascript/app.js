@@ -1,4 +1,6 @@
 
+// Start Firebase database configuration
+
 var firebaseConfig = {
     apiKey: "AIzaSyBps3TF6o-I5N6-YJ4ov3RyoIQ9P5CTMyo",
     authDomain: "traveltrek-19d5c.firebaseapp.com",
@@ -13,6 +15,8 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 var clickCounter = 0;
+
+// start page hiding the navbar
 
 window.onload = function () {
 
@@ -115,13 +119,15 @@ function displayVideos(response) {
 function displayPlaces(response) {
 
     var places = response.results
+
     //Check if there are no results in search
+
     if (response.status === "ZERO_RESULTS") {
 
         $("#result").text("Sorry Not Results Found")
     } else {
 
-
+        //create the table for Places 
         var tableDisplay = $("<table>").attr("id", "displayTable");
         var trHeader = $("<tr>").attr("id", "trHeader");
         var nameCol = $("<th>").text("Name").attr("id", "name");
@@ -143,7 +149,7 @@ function displayPlaces(response) {
             // Creating a paragraph tag with the result item's rating
             var name = $("<td>").text(places[i].name);
 
-
+            //display the results on the the screen
             var rating = $("<td>").text(places[i].rating);
             var type = $("<td>").text(places[i].types[0] + " " + places[i].types[1]);
             var address = $("<td>").text(places[i].vicinity);
@@ -161,6 +167,7 @@ function displayPlaces(response) {
 }
 
 //starts Ajax Call
+//Using Google Custome Search API
 function tredingAjaxCall(url) {
     $.ajax({
         method: "GET",
@@ -170,6 +177,7 @@ function tredingAjaxCall(url) {
     });
 }
 //starts Ajax Call
+//Using PixaBay API
 function imagesAjaxCall(url) {
     $.ajax({
         method: "GET",
@@ -179,6 +187,7 @@ function imagesAjaxCall(url) {
     });
 }
 //starts Ajax Call
+//Using PixaBay API
 function videosAjaxCall(url) {
     $.ajax({
         method: "GET",
@@ -188,6 +197,7 @@ function videosAjaxCall(url) {
     });
 }
 //starts Ajax Call
+//Using Google Places API
 function placesAjaxCall(url) {
     $.ajax({
         method: "GET",
@@ -197,21 +207,26 @@ function placesAjaxCall(url) {
     });
 }
 
+//This function hides and shows the nav menu
 function hideNav() {
 
     $("#jumbo").hide()
     $("#navBar").show();
 }
 
+//function keeps count of searches and stores them to the DB
 function pushData() {
     $("#clickCounter").empty();
     clickCounter++;
 
-      database.ref("clicks").set({
+    database.ref("clicks").set({
         clickCount: clickCounter
     });
-    
+
 }
+
+//Gets the user's searches and adds them to the DB
+
 function getSearches(search) {
     console.log(search)
     database.ref().push({
@@ -219,12 +234,14 @@ function getSearches(search) {
     })
 }
 //Shows number of searches
-database.ref("clicks").on("value", function(snapshot){
-    clickCounter = snapshot.val().clickCount;
-    var display = $("<p>").text("Total Searches: "+snapshot.val().clickCount);
+database.ref("clicks").on("value", function (snapshot) {
+    // clickCounter = snapshot.val().clickCount;
+    var display = $("<p>").text("Total Searches: " + snapshot.val().clickCount);
     $("#clickCounter").html(display);
 
 });
+
+//Shows the user's searches on the screen
 
 database.ref().limitToLast(5).on("child_added", function (snap) {
     var item = snap.val();
@@ -259,11 +276,11 @@ function showPosition(position) {
 //==========================================================================================================
 $("#trendingButton").on("click", function (event) {
     event.preventDefault();
-    
-
     $("#result").empty();
-    // Number of times the page has been researched
+
     var searchInput = $("#search").val();
+
+    //Checks if the user clicks without typing a search first
     if (searchInput === "") {
         var error = $("<h1>").text("Please enter a search term").attr("id", "error");
         $("#result").append(error)
@@ -288,11 +305,12 @@ $("#trendingButton").on("click", function (event) {
 $("#imageButton").on("click", function (event) {
     event.preventDefault();
     $("#result").empty();
-    // Number of times the page has been researched
 
 
     var imgKey = "13124707-0417aa5bfcc30fe6d133d9572"
     var imageSearch = $("#search").val();
+
+    //Checks if the user clicks without typing a search first
     if (imageSearch === "") {
         var error = $("<h1>").text("Please enter a search term").attr("id", "error");
         $("#result").append(error)
@@ -306,7 +324,7 @@ $("#imageButton").on("click", function (event) {
         getSearches(imageSearch);
         pushData();
         $("#recentSearch").show();
-     
+
     }
 });
 
@@ -316,11 +334,11 @@ $("#imageButton").on("click", function (event) {
 $("#videoButton").on("click", function (event) {
     event.preventDefault();
     $("#result").empty();
-    // Number of times the page has been researched
-    
 
     var vidKey = "13124707-0417aa5bfcc30fe6d133d9572"
     var videoSearch = $("#search").val();
+
+    //Checks if the user clicks without typing a search first
     if (videoSearch === "") {
         var error = $("<h1>").text("Please enter a search term").attr("id", "error");
         $("#result").append(error)
@@ -343,13 +361,15 @@ $("#videoButton").on("click", function (event) {
 $("#placesButton").on("click", function (event) {
     event.preventDefault();
     $("#result").empty();
-    // Number of times the page has been researched
+
     getLocation()
 
     //stores latitute and longitude from the local storage
     var latitude = localStorage.getItem("latitude");
     var longitude = localStorage.getItem("longitude");
     var places = $("#search").val();
+
+    //Checks if the user clicks without typing a search first
     if (places === "") {
         var error = $("<h1>").text("Please enter a search term").attr("id", "error");
         $("#result").append(error)
@@ -373,14 +393,14 @@ $("#placesButton").on("click", function (event) {
 
 //NAV MENU CODE  HAD TO CALL THE API'S AGAIN IN ORDER TO NO CONFLICT WITH THE FIRST SET OF BUTTONS AND SEARCH BAR
 //====================================================================================================================
-
+//====================================================================================================================
 //====================================================================================================================
 $("#trendingButton2").on("click", function (event) {
 
     event.preventDefault();
     $("#result").empty();
     // Number of times the page has been researched
-  
+
 
     var searchInput = $("#search2").val();
     var googleKey = "AIzaSyBRlj_omJsZWTgEIXq9yLePCL_HNfIfdkk"
@@ -391,9 +411,6 @@ $("#trendingButton2").on("click", function (event) {
     getSearches(searchInput);
 });
 
-//===============================================================================================================
-//API USED pixabay free images by thousands of users online
-//This API allow the user so find photos by local or turist in high def unlike random pictues.
 
 $("#imageButton2").on("click", function (event) {
     event.preventDefault();
@@ -410,13 +427,13 @@ $("#imageButton2").on("click", function (event) {
 });
 
 
-//===================================================================================================================
-//API USED pixabay free videos by thousands of users online
+
+
 $("#videoButton2").on("click", function (event) {
     event.preventDefault();
     $("#result").empty();
     // Number of times the page has been researched
-   
+
     var vidKey = "13124707-0417aa5bfcc30fe6d133d9572"
     var videoSearch = $("#search2").val();
     var queryVideoURL = "https://pixabay.com/api/videos/?key=" + vidKey + "&q=" + videoSearch
@@ -433,7 +450,7 @@ $("#placesButton2").on("click", function (event) {
     event.preventDefault();
     $("#result").empty();
     // Number of times the page has been researched
-    
+
     getLocation()
 
     //stores latitute and longitude from the local storage
