@@ -235,9 +235,10 @@ function getSearches(search) {
 }
 //Shows number of searches
 database.ref("clicks").on("value", function (snapshot) {
-    // clickCounter = snapshot.val().clickCount;
+    clickCounter = snapshot.val().clickCount;
     var display = $("<p>").text("Total Searches: " + snapshot.val().clickCount);
     $("#clickCounter").html(display);
+    
 
 });
 
